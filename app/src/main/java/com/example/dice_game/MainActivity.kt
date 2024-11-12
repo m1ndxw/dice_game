@@ -36,14 +36,14 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Скрыть поле ввода и кнопку броска
+            //скрытие поле ввода и кнопки броска
             inputField.visibility = View.GONE
             rollButton.visibility = View.GONE
 
-            // Начинаем вращение кубиков
+            // вращение кубиков
             startDiceAnimation(diceImage1, diceImage2)
 
-            // Задержка перед остановкой кубиков
+            //задержка перед остановкой кубиков
             diceImage1.postDelayed({
                 val diceRoll1 = rollDice()
                 val diceRoll2 = rollDice()
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         playAgainButton.setOnClickListener {
-            // Сбросить результаты и начать новую игру
+            //сброс результатов и начало новой игры
             resetGame()
         }
     }
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     private fun startDiceAnimation(vararg diceImages: ImageView) {
         val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.rotate)
         for (image in diceImages) {
-            image.setImageResource(R.drawable.dice_0) // устанавливаем пустой кубик
+            image.setImageResource(R.drawable.dice_0) //пустой кубик
             image.startAnimation(animation)
         }
     }
