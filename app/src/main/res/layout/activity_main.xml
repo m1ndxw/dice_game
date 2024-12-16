@@ -1,56 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:padding="16dp">
+    android:padding="0dp">
 
-    <TextView
-        android:id="@+id/result_text"
-        android:layout_width="wrap_content"
+    <!-- Верхняя панель -->
+    <LinearLayout
+        android:id="@+id/top_panel"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Нажмите, чтобы начать!"
-        android:textSize="24sp"
-        android:layout_marginBottom="16dp"/>
-
-    <ImageView
-        android:id="@+id/dice_image_1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/dice_0"
-        android:layout_margin="8dp" />
-
-    <ImageView
-        android:id="@+id/dice_image_2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/dice_0"
-        android:layout_margin="8dp" />
-
-    <EditText
-        android:id="@+id/input_field"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Введите число от 2 до 12"
-        android:inputType="number"
-        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        android:background="#6200EE"
         android:padding="12dp"
-        android:minWidth="200dp"
-        android:minHeight="48dp"/>
+        android:gravity="center_vertical">
 
-    <Button
-        android:id="@+id/roll_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Бросить кубики"
-        android:layout_marginTop="16dp" />
+        <ImageView
+            android:id="@+id/dice_icon_main.xml"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/dice_icon_main"
+            android:contentDescription="@string/app_name"
+            android:layout_marginEnd="8dp" />
 
-    <Button
-        android:id="@+id/play_again_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Играть снова"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Угадай число"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"
+            android:gravity="center" />
+    </LinearLayout>
+
+    <!-- Основное содержимое -->
+    <LinearLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="16dp"
+        android:layout_below="@id/top_panel">
+
+        <TextView
+            android:id="@+id/result_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Нажмите, чтобы начать!"
+            android:textSize="24sp"
+            android:layout_marginBottom="16dp" />
+
+        <ImageView
+            android:id="@+id/dice_image_1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/dice_0"
+            android:layout_margin="8dp" />
+
+        <ImageView
+            android:id="@+id/dice_image_2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/dice_0"
+            android:layout_margin="8dp" />
+
+        <EditText
+            android:id="@+id/input_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Введите число от 2 до 12"
+            android:inputType="number"
+            android:layout_marginBottom="16dp"
+            android:padding="12dp"
+            android:minWidth="200dp"
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/roll_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Бросить кубики"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/play_again_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Играть снова"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+    </LinearLayout>
+</RelativeLayout>
