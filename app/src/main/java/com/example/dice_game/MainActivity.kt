@@ -1,11 +1,9 @@
 package com.example.dice_game
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.random.Random
 
@@ -17,6 +15,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var diceImage2: ImageView
     private lateinit var playAgainButton: Button
     private lateinit var inputField: EditText
+    private lateinit var resultsButton: Button
+
+    private val gameResults = arrayListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         diceImage2 = findViewById(R.id.dice_image_2)
         playAgainButton = findViewById(R.id.play_again_button)
         inputField = findViewById(R.id.input_field)
+        resultsButton = findViewById(R.id.results_button)
 
         rollButton.setOnClickListener {
             val userInput = inputField.text.toString().toIntOrNull()
@@ -36,14 +38,11 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            //скрытие поле ввода и кнопки броска
             inputField.visibility = View.GONE
             rollButton.visibility = View.GONE
 
-            // вращение кубиков
             startDiceAnimation(diceImage1, diceImage2)
 
-            //задержка перед остановкой кубиков
             diceImage1.postDelayed({
                 val diceRoll1 = rollDice()
                 val diceRoll2 = rollDice()
@@ -59,12 +58,27 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 playAgainButton.visibility = Button.VISIBLE
-            }, 3000) // 3 секунды для вращения
+            }, 3000)
         }
 
         playAgainButton.setOnClickListener {
-            //сброс результатов и начало новой игры
+            val gameResult = if (resultText.text.contains("Поздравляем")) "Выигрыш" else "Проигрыш"
+            val userGuess = inputField.text.toString()
+
+            val totalRoll = resultText.text.toString()
+                .substringAfter("Вы выбросили: ")
+                .substringBefore(".")
+
+            gameResults.add("Ваш ответ: $userGuess, Итог: $totalRoll, Результат: $gameResult")
+
             resetGame()
+        }
+
+
+        resultsButton.setOnClickListener {
+            val intent = Intent(this, ResultsActivity::class.java)
+            intent.putStringArrayListExtra("GAME_RESULTS", gameResults)
+            startActivity(intent)
         }
     }
 
@@ -86,7 +100,7 @@ class MainActivity : AppCompatActivity() {
     private fun startDiceAnimation(vararg diceImages: ImageView) {
         val animation = android.view.animation.AnimationUtils.loadAnimation(this, R.anim.rotate)
         for (image in diceImages) {
-            image.setImageResource(R.drawable.dice_0) //пустой кубик
+            image.setImageResource(R.drawable.dice_0)
             image.startAnimation(animation)
         }
     }
@@ -94,7 +108,7 @@ class MainActivity : AppCompatActivity() {
     private fun resetGame() {
         resultText.text = "Нажмите, чтобы начать!"
         playAgainButton.visibility = Button.GONE
-        rollButton.visibility = Button.VISIBLE
+        rollButton.visibility = View.VISIBLE
         inputField.visibility = View.VISIBLE
         inputField.text.clear()
         diceImage1.setImageResource(R.drawable.dice_0)

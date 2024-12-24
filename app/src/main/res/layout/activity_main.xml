@@ -89,5 +89,12 @@
             android:text="Играть снова"
             android:layout_marginTop="16dp"
             android:visibility="gone" />
+
+        <Button
+            android:id="@+id/results_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Результаты"
+            android:visibility="visible" />
     </LinearLayout>
 </RelativeLayout>
